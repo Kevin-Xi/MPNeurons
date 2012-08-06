@@ -12,7 +12,7 @@ MiddleNeuron::~MiddleNeuron(){
 
 void MiddleNeuron::supconnect(bool input){
 	if(input)
-	  addcountThrNum(1);
+	  addcountThrNum(1);	//if input false, do nothing
 }
 
 void MiddleNeuron::insupconnect(bool input){

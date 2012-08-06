@@ -12,7 +12,7 @@ public:
 	const string getType();
 
 private:
-	bool OutputofIN();
+	bool OutputofIN();	//return output(active or not), connect with other neurons
 };
 
 #endif

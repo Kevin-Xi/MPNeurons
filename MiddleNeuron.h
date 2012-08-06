@@ -8,8 +8,8 @@ public:
 	MiddleNeuron(int,int);
 	~MiddleNeuron();
 
-	void supconnect(bool);
-	void insupconnect(bool);
+	void supconnect(bool);	//if previous one output true, this one's countThrNum will +1
+	void insupconnect(bool);	//if previous one output true, this one will be restrained
 	const string getType();
 
 private:

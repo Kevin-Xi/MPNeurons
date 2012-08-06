@@ -1,0 +1,40 @@
+*** glibc detected *** ./main: free(): invalid pointer: 0x00007fff8e17fb88 ***
+======= Backtrace: =========
+/lib/x86_64-linux-gnu/libc.so.6(+0x7e626)[0x2abc4cd79626]
+./main[0x401c0d]
+./main[0x401aad]
+/lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0xed)[0x2abc4cd1c76d]
+./main[0x4019b9]
+======= Memory map: ========
+00400000-00408000 r-xp 00000000 08:08 791165                             /home/kevin/Source/MPNeurons/main
+00607000-00608000 r--p 00007000 08:08 791165                             /home/kevin/Source/MPNeurons/main
+00608000-00609000 rw-p 00008000 08:08 791165                             /home/kevin/Source/MPNeurons/main
+01a73000-01a94000 rw-p 00000000 00:00 0                                  [heap]
+2abc4c5bf000-2abc4c5e1000 r-xp 00000000 08:08 4329036                    /lib/x86_64-linux-gnu/ld-2.15.so
+2abc4c5e1000-2abc4c5e6000 rw-p 00000000 00:00 0 
+2abc4c7e1000-2abc4c7e2000 r--p 00022000 08:08 4329036                    /lib/x86_64-linux-gnu/ld-2.15.so
+2abc4c7e2000-2abc4c7e4000 rw-p 00023000 08:08 4329036                    /lib/x86_64-linux-gnu/ld-2.15.so
+2abc4c7e4000-2abc4c8c6000 r-xp 00000000 08:08 3415659                    /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.16
+2abc4c8c6000-2abc4cac5000 ---p 000e2000 08:08 3415659                    /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.16
+2abc4cac5000-2abc4cacd000 r--p 000e1000 08:08 3415659                    /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.16
+2abc4cacd000-2abc4cacf000 rw-p 000e9000 08:08 3415659                    /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.16
+2abc4cacf000-2abc4cae4000 rw-p 00000000 00:00 0 
+2abc4cae4000-2abc4caf9000 r-xp 00000000 08:08 4329077                    /lib/x86_64-linux-gnu/libgcc_s.so.1
+2abc4caf9000-2abc4ccf8000 ---p 00015000 08:08 4329077                    /lib/x86_64-linux-gnu/libgcc_s.so.1
+2abc4ccf8000-2abc4ccf9000 r--p 00014000 08:08 4329077                    /lib/x86_64-linux-gnu/libgcc_s.so.1
+2abc4ccf9000-2abc4ccfa000 rw-p 00015000 08:08 4329077                    /lib/x86_64-linux-gnu/libgcc_s.so.1
+2abc4ccfa000-2abc4ccfb000 rw-p 00000000 00:00 0 
+2abc4ccfb000-2abc4ceae000 r-xp 00000000 08:08 4329056                    /lib/x86_64-linux-gnu/libc-2.15.so
+2abc4ceae000-2abc4d0ad000 ---p 001b3000 08:08 4329056                    /lib/x86_64-linux-gnu/libc-2.15.so
+2abc4d0ad000-2abc4d0b1000 r--p 001b2000 08:08 4329056                    /lib/x86_64-linux-gnu/libc-2.15.so
+2abc4d0b1000-2abc4d0b3000 rw-p 001b6000 08:08 4329056                    /lib/x86_64-linux-gnu/libc-2.15.so
+2abc4d0b3000-2abc4d0b8000 rw-p 00000000 00:00 0 
+2abc4d0b8000-2abc4d1b1000 r-xp 00000000 08:08 4329088                    /lib/x86_64-linux-gnu/libm-2.15.so
+2abc4d1b1000-2abc4d3b0000 ---p 000f9000 08:08 4329088                    /lib/x86_64-linux-gnu/libm-2.15.so
+2abc4d3b0000-2abc4d3b1000 r--p 000f8000 08:08 4329088                    /lib/x86_64-linux-gnu/libm-2.15.so
+2abc4d3b1000-2abc4d3b2000 rw-p 000f9000 08:08 4329088                    /lib/x86_64-linux-gnu/libm-2.15.so
+2abc4d3b2000-2abc4d3b6000 rw-p 00000000 00:00 0 
+7fff8e160000-7fff8e181000 rw-p 00000000 00:00 0                          [stack]
+7fff8e1ff000-7fff8e200000 r-xp 00000000 00:00 0                          [vdso]
+ffffffffff600000-ffffffffff601000 r-xp 00000000 00:00 0                  [vsyscall]
+make: *** [run] 已放弃 (core dumped)

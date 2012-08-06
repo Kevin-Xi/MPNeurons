@@ -3,7 +3,7 @@
 #include "Console.h"
 #include <deque>
 #include <iomanip>
-#include <sstream>
+#include <sstream>	//use in cast int to string when a int need to be store as a string
 #include <fstream>
 #include <iostream>
 using namespace std;
@@ -15,7 +15,7 @@ Console::Console(){
 }
 
 Console::~Console(){
-	//delete[] NeuronsList;
+	//delete[] NeuronsList;	//If use this, the program will output many thing when it quit, see the file "buildlog"
 	for(int i=NumofNeurs-1;i>=0;i--)
 		delete NeuronsList[i];
 	history.clear();
@@ -25,7 +25,7 @@ void Console::run(){
 	displayMainMenu();
 	int choice=0;
 	cin>>choice;
-		//EXCEPTION HANDLE
+		//EXCEPTION HANDLE FOR UNEXCEPTED INPUT, SAME TO BELOW
 	while(choice!=0){
 		if(choice==1){
 			displayEditMenu();
@@ -65,7 +65,7 @@ void Console::run(){
 				}
 				displayEditMenu();
 				cin>>echoice;
-				if(echoice==0&&changeflag){
+				if(echoice==0&&changeflag){	//check change when quit
 					cout<<"Logfile is changed, do you want to save?(y/n): ";
 					char yn2;
 					cin>>yn2;
@@ -91,7 +91,7 @@ void Console::run(){
 				}
 				displayRunMenu();
 				cin>>rchoice;
-				if(rchoice==0&&changeflag){
+				if(rchoice==0&&changeflag){	//check change when quit
 					cout<<"Logfile is changed, do you want to save?(y/n): ";
 					char yn3;
 					cin>>yn3;
@@ -136,7 +136,7 @@ void Console::create(){
 			cin>>Thrnum;
 			NeuronsList[NumofNeurs]=new InputNeuron(Thrnum,NumofNeurs+1);
 			NumofNeurs++;
-			changeflag=true;
+			changeflag=true;	//should do something with history before break
 			break;
 		case 2:
 			cout<<"Please set Threshold: ";
@@ -144,7 +144,7 @@ void Console::create(){
 			cin>>Thrnum;
 			NeuronsList[NumofNeurs]=new MiddleNeuron(Thrnum,NumofNeurs+1);
 			NumofNeurs++;
-			changeflag=true;
+			changeflag=true;	//should do something with history before break
 			break;
 		case 3:
 			cout<<"Please set Threshold: ";
@@ -152,7 +152,7 @@ void Console::create(){
 			cin>>Thrnum;
 			NeuronsList[NumofNeurs]=new OutputNeuron(Thrnum,NumofNeurs+1);
 			NumofNeurs++;
-			changeflag=true;
+			changeflag=true;	//should do something with history before break
 			break;
 		case 0:
 		default:
@@ -175,7 +175,7 @@ void Console::destory(){
       cout<<"Error Flag 0.\n";
 	  return;
 	}
-	else{
+	else{	//3 situations when you want to delete a element in a numbergroup
 		if(NumofNeurs==1){
 			delete NeuronsList[0];
 			NumofNeurs=0;
@@ -189,7 +189,7 @@ void Console::destory(){
 			for(int i=delno-1;i<NumofNeurs-1;i++)
 				NeuronsList[i]=NeuronsList[i+1];
 			NeuronsList[NumofNeurs-2]=NeuronsList[NumofNeurs-1];
-			//delete NeuronsList[NumofNeurs-1];   !!!
+			//delete NeuronsList[NumofNeurs-1];   //If do this, the [NumofNeurs-2] one will refer to a NULL space
 			NeuronsList[NumofNeurs-1]=NULL;
 			NumofNeurs--;
 		}
@@ -197,7 +197,7 @@ void Console::destory(){
 	}
 }
 
-void Console::status(){
+void Console::status(){	//useless format control without GUI
 	cout<<"No."<<setw(7)<<"Type"<<setw(19)<<"Threshold"<<setw(15)<<"Status\t"<<setw(19)<<"Connection\n";
 	for(int i=0;i<NumofNeurs;i++){
 		cout<<i+1<<"."<<setw(7)<<NeuronsList[i]->getType()<<setw(19)<<NeuronsList[i]->getThreshold()
@@ -214,11 +214,11 @@ void Console::connect(){
 	int con1st=0;
 	cin>>con1st;
 		//EXCEPTION HANDLE
-	if(con1st<=0||con1st>NumofNeurs){
+	if(con1st<=0||con1st>NumofNeurs){	//in actually, con1st==0 is not necessary a exception, same as below
 		cout<<"Error Flag 1.\n";	//EH
 		return;
 	}
-	if(NeuronsList[con1st-1]->getType()=="Output Neuron"){
+	if(NeuronsList[con1st-1]->getType()=="Output Neuron"){	//an output neuron cannot connect to other
 		cout<<"Error Flag 7. You cannot input into an Output Neuron.\n";
 		return;
 	}
@@ -230,7 +230,7 @@ void Console::connect(){
 		cout<<"Error Flag 2.\n";	//EH
 		return;
 	}
-	if(NeuronsList[con2nd-1]->getType()=="Input Neuron"){
+	if(NeuronsList[con2nd-1]->getType()=="Input Neuron"){	//an input neuron cannot be connected to other
 		cout<<"Error Flag 8. You cannot output to a Input Neuron.\n";
 		return;
 	}
@@ -241,9 +241,10 @@ void Console::connect(){
 		cout<<"Error Flag 9.\n";
 		return;
 	}
-	ostringstream os0;
-	os0<<con1st<<" "<<con2nd<<" "<<conType;
-	string temp0=os0.str();
+	ostringstream os0;	//convert int to string
+	os0<<con1st<<" "<<con2nd<<" "<<conType;	
+	string temp0=os0.str();		//why I press TAB in vim after the ; in this line and it turn to []?
+								//It might because three plugins named vimgtd, vimwiki and snipMate, I delete .vim and the problem sloved
 	NeuronsList[con1st-1]->setConSta(temp0);
 	history.push_back("C "+temp0+"\n");
 	changeflag=true;
@@ -280,7 +281,7 @@ void Console::disconnect(){
 
 void Console::undo(){
 	if(!history.empty()){
-		histemp=history.back();
+		histemp=history.back();	//use in redo()
 		history.pop_back();
 		cout<<"Undo "<<histemp;
 		changeflag=true;
@@ -290,7 +291,7 @@ void Console::undo(){
 }
 
 void Console::redo(){
-	if(histemp!=""){
+	if(histemp!=""){	//Advance: redo temp number can set. Can also use deque to apply
 		history.push_back(histemp);
 		cout<<"Redo "<<histemp;
 		histemp="";
@@ -308,7 +309,7 @@ void Console::readlog(){
 		if(yn2=='y')
 			savelog();
 	}
-	cout<<"Please input readlogfile name: ";//Quit
+	cout<<"Please input readlogfile name: ";//Need something to Quit
 	string logname;
 	cin>>logname;
 	ifstream in(logname.c_str());
@@ -318,10 +319,11 @@ void Console::readlog(){
 		history.push_back(line+"\n");
 	in.close();
 	//refresh connect status of neurons
+	//UNFINISHED
 }
 
 void Console::savelog(){
-	cout<<"Please input savelogfile name: ";//Quit
+	cout<<"Please input savelogfile name: ";//Need something to Quit
 	string savename;
 	cin>>savename;
 	ofstream out(savename.c_str());
@@ -334,7 +336,7 @@ void Console::savelog(){
 		out<<history.front();
 		history.pop_front();
 	}
-	//log the status of neuronslist, if head #(means it is a create or destory operation), donnot write in logfile
+	//log the status of neuronslist, if head #(means it is a create or destory operation), donnot write in logfile---UNFINISHED
 	out.close();
 	changeflag=false;
 }
@@ -364,7 +366,7 @@ void Console::stimulate(){
 
 bool Console::checkempty(){
 	if(NumofNeurs==0){
-		cout<<"No NumofNeurs,do you want to create now?(y/n):";
+		cout<<"No neuron exists, do you want to create now?(y/n):";
 		char yn;
 		cin>>yn;
 		if(yn=='y'){

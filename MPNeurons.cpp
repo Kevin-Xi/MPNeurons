@@ -56,9 +56,9 @@ void MPNeurons::setConSta(string consta){
 	if(connectstatus=="")
 		connectstatus=consta;
 	else
-		connectstatus+="\n"+consta;
+		connectstatus+="\t"+consta;	//convenient when it cout directly...
 }
 
 const string MPNeurons::getConSta(){
-	return connectstatus;
+	return connectstatus;	//...although there is not so much things a Console(without GUI) can do. Using GUI is suitable and easy for this kind of program, so I decide to give up the Console
 }

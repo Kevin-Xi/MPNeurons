@@ -9,7 +9,7 @@ public:
 	~OutputNeuron();
 
 	void supconnect(bool);
-	void insupconnect(bool);
+	void insupconnect(bool);	//nothing different with previous kinds of neurons
 	const string getType();
 
 private:

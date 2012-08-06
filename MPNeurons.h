@@ -7,32 +7,30 @@
 using std::string;
 
 class MPNeurons{
-	friend class InputNeuron;
+	friend class InputNeuron;	//in order to use setSupFlag() and addcountThrNum() in its inher
 	friend class MiddleNeuron;
 	friend class OutputNeuron;
 public:
-	MPNeurons(int thr,int sernum);//(InThrNum,no)
+	MPNeurons(int thr,int sernum);//(ThrNum,no)
 	virtual ~MPNeurons();
 
 	int getThreshold();
 	int getcount();
-	bool IsSup();
-	bool IsActive();
-	virtual const string getType()=0;
-	const string getConSta();
+	bool IsSup();	//return true when is Sup
+	bool IsActive();	//return false when it is not active in this time, else return true. use in Console::status()
+	virtual const string getType()=0;	//use in Console::status()
+	const string getConSta();	//use in Console::status()
 
 	void setConSta(string);	//maybe not a good idea
 private:
 	int ThrNum;        //Threshold
 	int countThrNum;   //how many time it has been sting
-	//char* name;
-	int no;			   //serial number in NeuronsList[]
+	int no;			   //serial number in NeuronsList[],maybe useful in Console::history
 	bool SupFlag;		   //restrain or not
-	string connectstatus;	//as it say
+	string connectstatus;	//as it say, and use in Console::status()
 	
-	virtual void setThreshold(int);
-	//void setName(char*);
-	virtual void setno(int);
+	void setThreshold(int);
+	void setno(int);
 	void setSupFlag(bool);
 	void addcountThrNum(int);
 };

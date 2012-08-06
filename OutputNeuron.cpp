@@ -12,7 +12,7 @@ OutputNeuron::~OutputNeuron(){
 
 void OutputNeuron::supconnect(bool input){
 	if(input)
-	  addcountThrNum(1);
+	  addcountThrNum(1);	//not so much different with previous kinds of neurons
 }
 
 void OutputNeuron::insupconnect(bool input){

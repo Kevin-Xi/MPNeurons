@@ -11,14 +11,14 @@ InputNeuron::~InputNeuron(){
 }
 
 void InputNeuron::stimulatetime(int stino){
-	if(stino==0)	//input 0 means restrain this neuron
+	if(stino==0)	//input 0 to restrain this neuron
 	  setSupFlag(true);
 	else
 	  addcountThrNum(stino);
 }
 
 const string InputNeuron::getType(){
-	return "Input  Neuron";
+	return "Input  Neuron";	//format problem when output
 }
 
 bool InputNeuron::OutputofIN(){
